@@ -29,4 +29,29 @@ public class BankService {
         accounts.add(account);
         return accountNumber;
     }
+
+    private Account findById(String ID) {
+        for (Account account : accounts) {
+            if (account.getNumber().equals(ID)) {
+                return account;
+            }
+        }
+        return null;
+    }
+
+    public void transferMoney(BigDecimal amount, String fromAccID, String toAccID) {
+        Account fromAcc = findById(fromAccID);
+        Account toAcc = findById(toAccID);
+        if (fromAcc == null || toAcc == null) {
+            System.out.println("Account ID invalid, please check the account number carefully!");
+            return;
+        }
+        if(fromAcc.getBalance().compareTo(amount) < 0) {
+            System.out.println("Insufficient Balance! Add more funds or reduce transfer amount!");
+            return;
+        }
+        fromAcc.withdraw(amount);
+        toAcc.deposit(amount);
+        System.out.println("Transfer successful! " + amount + " transferred from " + fromAccID + " to " + toAccID);
+    }
 }
