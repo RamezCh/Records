@@ -14,6 +14,16 @@ public class Account {
         this.client = client;
     }
 
+    public void deposit(BigDecimal amount) {
+        balance = balance.add(amount);
+    }
+
+    public void withdraw(BigDecimal amount) {
+        if(balance.compareTo(amount) > 0) {
+        balance = balance.subtract(amount);
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
