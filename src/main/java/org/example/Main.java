@@ -15,5 +15,8 @@ public class Main {
         System.out.println(lion.equals(lion2));
         System.out.println(lion.equals(lion3));
         System.out.println(lion == lion2);
+        Animal[] animals = {lion, lion2, lion3};
+        Zoo zoo = new Zoo(animals);
+        System.out.println(zoo.calculateTotalFoodRequirement());
     }
 }
