@@ -1,17 +1,18 @@
 package org.example;
 
 import java.math.BigDecimal;
+import java.util.Set;
 import java.util.Objects;
 
 public class Account {
     private String number;
     private BigDecimal balance;
-    private Client client;
+    private Set<AccountHolder> accountHolders;
 
-    public Account(String number, BigDecimal balance, Client client) {
+    public Account(String number, BigDecimal balance, Set<AccountHolder> accountHolders) {
         this.number = number;
         this.balance = balance;
-        this.client = client;
+        this.accountHolders = accountHolders;
     }
 
     public void deposit(BigDecimal amount) {
@@ -19,8 +20,8 @@ public class Account {
     }
 
     public void withdraw(BigDecimal amount) {
-        if(balance.compareTo(amount) > 0) {
-        balance = balance.subtract(amount);
+        if (balance.compareTo(amount) >= 0) {
+            balance = balance.subtract(amount);
         }
     }
 
@@ -32,21 +33,21 @@ public class Account {
         return balance;
     }
 
-    public Client getClient() {
-        return client;
+    public Set<AccountHolder> getAccountHolders() {
+        return accountHolders;
     }
-
 
     @Override
     public boolean equals(Object o) {
+        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
-        return Objects.equals(number, account.number) && Objects.equals(balance, account.balance) && Objects.equals(client, account.client);
+        return Objects.equals(number, account.number) && Objects.equals(balance, account.balance) && Objects.equals(accountHolders, account.accountHolders);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(number, balance, client);
+        return Objects.hash(number, balance, accountHolders);
     }
 
     @Override
@@ -54,7 +55,7 @@ public class Account {
         return "Account{" +
                 "number='" + number + '\'' +
                 ", balance=" + balance +
-                ", client=" + client +
+                ", accountHolders=" + accountHolders +
                 '}';
     }
 }
