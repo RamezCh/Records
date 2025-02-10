@@ -4,9 +4,9 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Account {
-    protected String number;
-    protected BigDecimal balance;
-    protected Client client;
+    private String number;
+    private BigDecimal balance;
+    private Client client;
 
     public Account(String number, BigDecimal balance, Client client) {
         this.number = number;
@@ -23,6 +23,19 @@ public class Account {
         balance = balance.subtract(amount);
         }
     }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
 
     @Override
     public boolean equals(Object o) {
